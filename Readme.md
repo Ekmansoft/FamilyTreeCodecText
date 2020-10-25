@@ -5,7 +5,7 @@
 - Reader for some family tree export formats
 
 ### Dependencies
-- Dotnet Core 3.0
+- Dotnet Core 3.1
 - FamilyTreeLibrary https://github.com/endian02/FamilyTreeLibrary
 
 ### License 
