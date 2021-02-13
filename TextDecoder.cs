@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
-using FamilyTreeLibrary.FamilyData;
+﻿using FamilyTreeLibrary.FamilyData;
 //using FamilyTreeLibrary.FamilyFileFormat;
 //using FamilyTreeLibrary.FileFormats;
 using FamilyTreeLibrary.FamilyTreeStore;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.IO;
+using System.Runtime.Serialization;
+using System.Text;
 
 namespace FamilyTreeCodecText
 {
@@ -41,7 +40,7 @@ namespace FamilyTreeCodecText
 
       public void CheckAndSetDefined(bool defined)
       {
-        if(defined)
+        if (defined)
         {
           noOfDefinitions++;
         }
@@ -150,7 +149,7 @@ namespace FamilyTreeCodecText
 
       public void Analyze(TraceSource trace)
       {
-        foreach(XrefMapList xrefList in xrefLists.Values)
+        foreach (XrefMapList xrefList in xrefLists.Values)
         {
           xrefList.ShowIntegrity(trace);
         }
@@ -206,7 +205,7 @@ namespace FamilyTreeCodecText
 
       private bool IsThisLinePageBreak()
       {
-        if(EndOfFile())
+        if (EndOfFile())
         {
           return true;
         }
@@ -255,7 +254,7 @@ namespace FamilyTreeCodecText
 
       public void MoveToPreviousLineStart()
       {
-        while((filePos > 0) && (fileDataBuffer[filePos] != '\n')&& (fileDataBuffer[filePos] != '\r'))
+        while ((filePos > 0) && (fileDataBuffer[filePos] != '\n') && (fileDataBuffer[filePos] != '\r'))
         {
           filePos--;
         }
@@ -274,7 +273,7 @@ namespace FamilyTreeCodecText
       {
         double currentProgress = 100.0 * (double)filePos / (double)fileBuffer.GetSize();
 
-        if(currentProgress - progressPercent > 0.2)
+        if (currentProgress - progressPercent > 0.2)
         {
           return true;
         }
@@ -294,7 +293,7 @@ namespace FamilyTreeCodecText
       Name,
       //FirstName,
       EventToken,
-      Birth, 
+      Birth,
       Baptism,
       Occupation,
       Lived,
@@ -401,10 +400,10 @@ namespace FamilyTreeCodecText
 
     public TextDecoder()
     {
-    
+
     }
 
-    
+
 
     public bool ReadFile(String filename, ref IFamilyTreeStoreBaseClass inFamilyTree)
     {
@@ -513,18 +512,18 @@ namespace FamilyTreeCodecText
       int dateStartPos = -1;
       int parsePos = 0;
       int pos;
-      if((pos = localDate.IndexOf("omkring")) >= 0)
+      if ((pos = localDate.IndexOf("omkring")) >= 0)
       {
         approxDate = true;
         dateStartPos = pos;
         parsePos = pos + 8; // strlen("omkring ")
       }
 
-      if(parsePos == 0)
+      if (parsePos == 0)
       {
-        while(parsePos < dateStr.Length)
+        while (parsePos < dateStr.Length)
         {
-          if((dateStr[parsePos] >= '0') && (dateStr[parsePos] <= '9'))
+          if ((dateStr[parsePos] >= '0') && (dateStr[parsePos] <= '9'))
           {
             break;
           }
@@ -538,11 +537,11 @@ namespace FamilyTreeCodecText
       }
       FamilyDateTimeClass date = new FamilyDateTimeClass();
 
-      if(dateStartPos < 0)
+      if (dateStartPos < 0)
       {
         dateStartPos = parsePos;
       }
-      
+
       DateParseState state = DateParseState.Year;
       string partialString = "";
       int year = -1, month = -1, day = -1;
@@ -550,13 +549,13 @@ namespace FamilyTreeCodecText
       {
         char ch = localDate[parsePos++];
 
-        if((ch >= '0') && (ch <= '9'))
+        if ((ch >= '0') && (ch <= '9'))
         {
           partialString += ch;
         }
         if (ch == '-')
         {
-          switch(state)
+          switch (state)
           {
             case DateParseState.Year:
               if (partialString.Length > 0)
@@ -580,11 +579,11 @@ namespace FamilyTreeCodecText
               trace.TraceInformation("weird...");
               break;
           }
-          
+
         }
         else if ((ch == ' ') || (parsePos >= (localDate.Length)))
         {
-          if(partialString.Length > 0)
+          if (partialString.Length > 0)
           {
             switch (state)
             {
@@ -607,11 +606,11 @@ namespace FamilyTreeCodecText
           date.SetApproximate(approxDate);
           string outString = "";
 
-          if(dateStartPos > 0)
+          if (dateStartPos > 0)
           {
             outString = dateStr.Substring(0, dateStartPos);
           }
-          if(parsePos < localDate.Length)
+          if (parsePos < localDate.Length)
           {
             outString += dateStr.Substring(parsePos);
           }
@@ -747,7 +746,7 @@ namespace FamilyTreeCodecText
             trace.TraceInformation("child in " + familyId + "=" + familyXref);
             FamilyClass family = familyTree.GetFamily(familyXref);
 
-            if(family == null)
+            if (family == null)
             {
               family = new FamilyClass();
               family.SetXrefName(familyXref);
@@ -852,12 +851,12 @@ namespace FamilyTreeCodecText
     {
       List<SubStringInstance> subList = new List<SubStringInstance>();
 
-      foreach(EventDataString str in parserSettings.eventList)
+      foreach (EventDataString str in parserSettings.eventList)
       {
         int offset = 0;
         string newSubString = FindSubString(data, ref offset, str, ref subList);
 
-        while(newSubString != null)
+        while (newSubString != null)
         {
           newSubString = FindSubString(newSubString, ref offset, str, ref subList);
         }
@@ -881,17 +880,17 @@ namespace FamilyTreeCodecText
         trace.TraceInformation(inst.type + " start:" + inst.start + " end:" + inst.end);
         if (lastStart >= 0)
         {
-          if(lastStart < inst.end)
+          if (lastStart < inst.end)
           {
             inst.end = lastStart;
           }
         }
 
-        for(int i = inst.start; i < inst.end; i++)
+        for (int i = inst.start; i < inst.end; i++)
         {
           string oldStr = usage.Substring(i, 1);
 
-          if(oldStr != " ")
+          if (oldStr != " ")
           {
             trace.TraceInformation("warning overlap at " + i);
           }
@@ -922,33 +921,33 @@ namespace FamilyTreeCodecText
 
       List<SubStringInstance> subList = CheckSubstrings(id, data, parserSettings);
 
-      foreach(SubStringInstance item in subList)
+      foreach (SubStringInstance item in subList)
       {
-        EventDataString  thisType = null;
+        EventDataString thisType = null;
 
-        foreach(EventDataString str in parserSettings.eventList)
+        foreach (EventDataString str in parserSettings.eventList)
         {
-          if(str.type == item.type)
+          if (str.type == item.type)
           {
             thisType = str;
           }
         }
-        if(thisType != null)
+        if (thisType != null)
         {
           DecodeEvent(ref person, item.type, data.Substring(item.start + thisType.start.Length, item.end - item.start - thisType.start.Length - thisType.end.Length));
         }
       }
 
-      while(strPos < data.Length)
+      while (strPos < data.Length)
       {
         //string token = GetToken(ref strPos);
         char ch = data[strPos++];
 
 
-        switch(state)
+        switch (state)
         {
           case ParsePersonState.Name:
-            if(ch == '.')
+            if (ch == '.')
             {
               int firstNameStart;
               int firstNameLength;
@@ -1023,11 +1022,11 @@ namespace FamilyTreeCodecText
 
       BufferParseState parseState = new BufferParseState(fileBuffer, parserSettings.pageBreakStrings);
 
-      
+
       System.IO.StreamWriter personFile = new System.IO.StreamWriter(decodeFilename, false, Encoding.UTF8, 4096);
 
 
-      while(!parseState.EndOfFile())
+      while (!parseState.EndOfFile())
       {
         char ch = parseState.GetNextChar();
 
@@ -1122,10 +1121,10 @@ namespace FamilyTreeCodecText
             parseString = "";
             state = TextParseState.Start1;
             break;
-          //case TextParseState.End:
-          //  break;
+            //case TextParseState.End:
+            //  break;
         }
-        if(parseState.UpdateProgress())
+        if (parseState.UpdateProgress())
         {
           backgroundWorker.ReportProgress((int)parseState.GetProgress(), "Importing...");
         }
@@ -1144,7 +1143,7 @@ namespace FamilyTreeCodecText
       personFile.Close();
 
       backgroundWorker = null;
-      trace.TraceInformation("Text file parsing finished at " );
+      trace.TraceInformation("Text file parsing finished at ");
     }
 
     public override bool IsKnownFileType(String fileName)
