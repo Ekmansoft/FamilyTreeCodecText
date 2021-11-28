@@ -1,7 +1,7 @@
-﻿using FamilyTreeLibrary.FamilyData;
-//using FamilyTreeLibrary.FamilyFileFormat;
-//using FamilyTreeLibrary.FileFormats;
-using FamilyTreeLibrary.FamilyTreeStore;
+﻿using Ekmansoft.FamilyTree.Library.FamilyData;
+//using Ekmansoft.FamilyTree.Library.FamilyFileFormat;
+//using Ekmansoft.FamilyTree.Library.FileFormats;
+using Ekmansoft.FamilyTree.Library.FamilyTreeStore;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,7 +11,7 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace FamilyTreeCodecText
+namespace Ekmansoft.FamilyTree.Codec.Text
 {
 
   public class TextDecoder : FamilyFileTypeBaseClass

@@ -1,4 +1,4 @@
-### FamilyTreeCodecText
+### Ekmansoft.FamilyTree.Codec.Text
 - Dotnet Core text codec written in C# for managing genealogy family trees
 
 ### Description
@@ -6,7 +6,7 @@
 
 ### Dependencies
 - Dotnet Core 6.0
-- FamilyTreeLibrary https://github.com/Ekmansoft/FamilyTreeLibrary
+- Ekmansoft.FamilyTree.Library https://github.com/Ekmansoft/FamilyTreeLibrary
 
 ### License 
 - Apache 2.0
