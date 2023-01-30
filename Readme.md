@@ -5,7 +5,7 @@
 - Reader for some family tree export formats
 
 ### Dependencies
-- Dotnet Core 6.0
+- Dotnet 7.0
 - Ekmansoft.FamilyTree.Library https://github.com/Ekmansoft/FamilyTreeLibrary
 
 ### License 
