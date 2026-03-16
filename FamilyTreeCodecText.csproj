@@ -15,7 +15,7 @@
     <NeutralLanguage>en</NeutralLanguage>
     <PackageId>Ekmansoft.FamilyTree.Codec.Text</PackageId>
     <AssemblyName>Ekmansoft.FamilyTree.Codec.Text</AssemblyName>
-    <Version>1.4.0</Version>
+    <Version>1.5.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
